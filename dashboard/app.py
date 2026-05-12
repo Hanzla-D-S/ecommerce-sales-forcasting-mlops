@@ -64,11 +64,20 @@ def get_forecast(days):
         res = requests.post(
             f"{API_URL}/forecast",
             json={"days": days},
-            timeout=10
+            timeout=30  # increase timeout for HF
         )
-        return res.json()
-    except:
+        if res.status_code == 200:
+            return res.json()
+        else:
+            st.error(f"API Error: {res.status_code} - {res.text}")
+            return None
+    except requests.exceptions.ConnectionError:
+        st.error("Cannot connect to backend API")
         return None
+    except Exception as e:
+        st.error(f"Error: {str(e)}")
+        return None
+
 
 
 def get_single_prediction(date):
@@ -152,9 +161,10 @@ with left_col:
     )
 
     forecast_data = get_forecast(forecast_days)
+    st.write("DEBUG:", forecast_data)
     historical_data = load_historical_data()
 
-    if forecast_data and historical_data is not None:
+    if forecast_data and "forecast" in forecast_data and historical_data is not None:
         forecast_df = pd.DataFrame(forecast_data["forecast"])
         forecast_df["date"] = pd.to_datetime(forecast_df["date"])
 
@@ -232,7 +242,7 @@ with right_col:
 
     # ── Forecast Table ───────────────────────────────────────────────────────────
     st.markdown("### Forecast Table")
-    if forecast_data:
+    if forecast_data and "forecast" in forecast_data:
         forecast_df = pd.DataFrame(forecast_data["forecast"])
         forecast_df.columns = ["Date", "Predicted Revenue (£)"]
         forecast_df["Predicted Revenue (£)"] = forecast_df["Predicted Revenue (£)"].apply(
