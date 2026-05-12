@@ -1,0 +1,22 @@
+artifact_path: file:///D:/1-D-Drive/2-Data Science/1-Revision/8-AI-ChatBot/Ecommerce-sales-forcasting-pipeline/ecommerce-smartsales/mlruns/1/models/m-1d91c07b6d774e659d8944c4a7558463/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.11.0
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBRegressor
+    model_format: ubj
+    xgb_version: 3.2.0
+mlflow_version: 3.12.0
+model_id: m-1d91c07b6d774e659d8944c4a7558463
+model_size_bytes: 471637
+model_uuid: m-1d91c07b6d774e659d8944c4a7558463
+prompts: null
+run_id: f33710f987a546238d2429486094c8d1
+utc_time_created: '2026-05-12 15:11:31.418983'

@@ -1,0 +1,10 @@
+artifact_location: file:///D:/1-D-Drive/2-Data Science/1-Revision/8-AI-ChatBot/Ecommerce-sales-forcasting-pipeline/ecommerce-smartsales/mlruns/494086358576763624/models/m-8093161b17b2492dbbc943dc20b78c4d/artifacts
+creation_timestamp: 1778599369196
+experiment_id: '494086358576763624'
+last_updated_timestamp: 1778599383844
+model_id: m-8093161b17b2492dbbc943dc20b78c4d
+model_type: null
+name: xgboost_model
+source_run_id: f539722b092447b686daadd6105d12f1
+status: 2
+status_message: null
