@@ -45,7 +45,7 @@ st.markdown("""
 API_URL = os.getenv("API_URL", "http://127.0.0.1:8000")
 
 # ── Header ───────────────────────────────────────────────────────────────────────
-st.markdown("# 📈 SmartSales Forecasting Dashboard")
+st.markdown("# SmartSales Forecasting Dashboard")
 st.markdown("E-commerce revenue forecasting powered by XGBoost + MLflow")
 st.divider()
 
@@ -73,19 +73,19 @@ def get_forecast(days):
             if "forecast" in data:
                 return data
             else:
-                st.error(f"❌ API response missing forecast key: {data}")
+                st.error(f"API response missing forecast key: {data}")
                 return None
         else:
-            st.error(f"❌ API Error {res.status_code}: {res.text}")
+            st.error(f"API Error {res.status_code}: {res.text}")
             return None
     except requests.exceptions.ConnectionError:
-        st.error("❌ Cannot connect to backend API. It may still be starting up.")
+        st.error("Cannot connect to backend API. It may still be starting up.")
         return None
     except requests.exceptions.Timeout:
-        st.error("❌ API request timed out. Please refresh the page.")
+        st.error("API request timed out. Please refresh the page.")
         return None
     except Exception as e:
-        st.error(f"❌ Unexpected error: {str(e)}")
+        st.error(f"Unexpected error: {str(e)}")
         return None
 
 
@@ -151,13 +151,13 @@ if model_info:
             </div>
         """, unsafe_allow_html=True)
 else:
-    st.error("❌ Cannot connect to API. Backend may still be starting up. Please refresh in 30 seconds.")
+    st.error("Cannot connect to API. Backend may still be starting up. Please refresh in 30 seconds.")
     st.stop()
 
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ── Forecast Days Slider — defined BEFORE columns so both can use it ─────────────
-st.markdown("### 📊 Revenue Forecast")
+st.markdown("### Revenue Forecast")
 forecast_days = st.slider(
     "Select forecast period (days)",
     min_value=7,
@@ -170,8 +170,6 @@ forecast_days = st.slider(
 forecast_data = get_forecast(forecast_days)
 historical_data = load_historical_data()
 
-# ── Debug output — remove after fixing ──────────────────────────────────────────
-st.write("DEBUG API Response:", forecast_data)
 
 # ── Two columns layout ───────────────────────────────────────────────────────────
 left_col, right_col = st.columns([2, 1])
@@ -214,15 +212,15 @@ with left_col:
         st.plotly_chart(fig, use_container_width=True)
 
         total = forecast_data["total_predicted_revenue"]
-        st.success(f"💰 Total Forecasted Revenue ({forecast_days} days): **£{total:,.2f}**")
+        st.success(f"Total Forecasted Revenue ({forecast_days} days): **£{total:,.2f}**")
 
     elif forecast_data is None:
-        st.warning("⏳ Waiting for forecast data. Please refresh in a moment.")
+        st.warning("Waiting for forecast data. Please refresh in a moment.")
     elif historical_data is None:
-        st.warning("⚠️ Could not load historical data.")
+        st.warning("Could not load historical data.")
 
 with right_col:
-    st.markdown("### 🎯 Predict Single Day")
+    st.markdown("### Predict Single Day")
 
     selected_date = st.date_input(
         "Select a date",
@@ -230,7 +228,7 @@ with right_col:
         min_value=datetime.now()
     )
 
-    if st.button("🔮 Predict Revenue", use_container_width=True):
+    if st.button("Predict Revenue", use_container_width=True):
         result = get_single_prediction(str(selected_date))
         if result and "predicted_revenue" in result:
             revenue = result["predicted_revenue"]
@@ -242,17 +240,17 @@ with right_col:
             """, unsafe_allow_html=True)
 
             if revenue > 15000:
-                st.success("📈 High revenue day expected!")
+                st.success("High revenue day expected!")
             elif revenue > 8000:
-                st.info("📊 Average revenue day expected")
+                st.info("Average revenue day expected")
             else:
-                st.warning("📉 Low revenue day expected")
+                st.warning("Low revenue day expected")
         else:
-            st.error("❌ Could not get prediction. Please try again.")
+            st.error("Could not get prediction. Please try again.")
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.markdown("### 📋 Forecast Table")
+    st.markdown("### Forecast Table")
     if forecast_data is not None:
         forecast_table_df = pd.DataFrame(forecast_data["forecast"])
         forecast_table_df.columns = ["Date", "Predicted Revenue (£)"]
@@ -261,11 +259,11 @@ with right_col:
         )
         st.dataframe(forecast_table_df, use_container_width=True, hide_index=True)
     else:
-        st.info("⏳ Forecast data not available yet.")
+        st.info("Forecast data not available yet.")
 
 # ── Historical Revenue Chart ─────────────────────────────────────────────────────
 st.divider()
-st.markdown("### 📅 Historical Revenue (Last 90 Days)")
+st.markdown("### Historical Revenue (Last 90 Days)")
 
 if historical_data is not None:
     fig2 = px.bar(
@@ -287,4 +285,4 @@ if historical_data is not None:
     )
     st.plotly_chart(fig2, use_container_width=True)
 else:
-    st.warning("⚠️ Could not load historical data.")
+    st.warning("Could not load historical data.")
