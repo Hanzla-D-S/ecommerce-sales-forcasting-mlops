@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  smartsales:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    container_name: smartsales_app
+    ports:
+      - "8000:8000"
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./mlruns:/app/mlruns
+    restart: unless-stopped

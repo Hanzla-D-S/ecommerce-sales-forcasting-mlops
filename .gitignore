@@ -1,0 +1,22 @@
+# virtual environments
+env/
+venv/
+.venv/
+
+# python cache
+__pycache__/
+*.pyc
+
+# notebooks
+.ipynb_checkpoints/
+
+# datasets
+data/raw/
+*.csv
+
+# MLflow
+mlruns/
+mlflow.db
+
+# model binaries
+*.ubj
