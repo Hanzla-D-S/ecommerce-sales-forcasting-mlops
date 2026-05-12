@@ -170,7 +170,6 @@ forecast_days = st.slider(
 forecast_data = get_forecast(forecast_days)
 historical_data = load_historical_data()
 
-
 # ── Two columns layout ───────────────────────────────────────────────────────────
 left_col, right_col = st.columns([2, 1])
 
