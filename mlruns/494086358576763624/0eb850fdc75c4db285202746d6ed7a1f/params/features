@@ -1,1 +1,0 @@
-['day_of_week', 'day_of_month', 'month', 'quarter', 'week_of_year', 'is_weekend', 'is_month_start', 'is_month_end', 'revenue_lag_1', 'revenue_lag_7', 'revenue_lag_14', 'revenue_lag_30', 'revenue_rolling_7', 'revenue_rolling_14', 'revenue_rolling_30', 'total_orders', 'total_items', 'unique_customers']
