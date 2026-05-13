@@ -208,5 +208,5 @@ Every push to main branch automatically:
 
 Muhammad Hanzla
 - Email: hanzlainam204@gmail.com
-- LinkedIn: [https://linkedin.com/in/YOUR_LINKEDIN](https://www.linkedin.com/in/muhammad-hanzla-data-science/)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/muhammad-hanzla-data-science/)
 - GitHub: https://github.com/Hanzla-D-S
