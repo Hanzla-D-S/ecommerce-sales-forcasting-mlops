@@ -7,13 +7,6 @@ app_port: 7860
 pinned: false
 ---
 
----
-title: SmartSales Forecasting
-colorFrom: blue
-colorTo: green
-sdk: docker
-pinned: false
----
 
 # SmartSales - E-commerce Sales Forecasting MLOps Pipeline
 
